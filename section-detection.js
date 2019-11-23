@@ -22,7 +22,7 @@ if (sidebarMenu) {
       return elementsInRange;
     }
 
-    // Returns Element whos top position is closest to the top 
+    // Returns Element whos top position is closest to the top.
     const elementWithPriority = function () {
       const elementsInRange = getElementsInRange(sectionsToTrack);
       elementsInRange.sort(function (a, b) {
