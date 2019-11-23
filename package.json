@@ -1,0 +1,15 @@
+{
+  "name": "section-detection",
+  "version": "1.0.0",
+  "description": "",
+  "main": "section-detection.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Bobby Lee <rdlee8181@gmail.com> (https://sapphiredev.io/)",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel-bundler": "1.12.4"
+  }
+}
