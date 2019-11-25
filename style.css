@@ -1,8 +1,7 @@
-html, body {
+body {
   margin: 0;
   width: 100%;
   font-family: 'Verdana', san-serif;
-  /*padding: 0 40px;*/
 }
 
 section:nth-of-type(1){
@@ -63,7 +62,6 @@ section:nth-of-type(7){
   right: 0;
   top: 40%;
   width: 120px;
-  border: 1px solid pink;
   text-align: right;
   padding-right: 20px;
 }
