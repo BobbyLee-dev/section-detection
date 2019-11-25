@@ -4,28 +4,28 @@ if (sidebarMenu) {
   (function () {
     
     const sectionsToTrack = document.querySelectorAll('.section-to-track');
-    const bottomRange = window.innerHeight / 2;
+    const middleOfViewport = window.innerHeight / 2;
     
-    // Returns array of elements that are in range - top(0px) - bottomRange.
-    const getElementsInRange = function (elements) {
-      const elementsInRange = [];
+    // Returns array of elements that are in range - top(0px) - middleOfViewport.
+    const getElementsInViewport = function (elements) {
+      const elementsInViewport = [];
       elements.forEach(function (element) {
         const elementPosition = element.getBoundingClientRect();
         if (elementPosition.top < 0 && elementPosition.height > elementPosition.top * -1) {
-          elementsInRange.push({ element: element, top: elementPosition.top });
-        } else if (elementPosition.top >= 0 && elementPosition.top < bottomRange) {
-          elementsInRange.push({ element: element, top: elementPosition.top });
+          elementsInViewport.push({ element: element, top: elementPosition.top });
+        } else if (elementPosition.top >= 0 && elementPosition.top < middleOfViewport) {
+          elementsInViewport.push({ element: element, top: elementPosition.top });
         } else {
           element.classList.remove('active'); 
         }
       })
-      return elementsInRange;
+      return elementsInViewport;
     }
 
     // Returns Element whos top position is closest to the top.
     const elementWithPriority = function () {
-      const elementsInRange = getElementsInRange(sectionsToTrack);
-      elementsInRange.sort(function (a, b) {
+      const elementsInViewport = getElementsInViewport(sectionsToTrack);
+      elementsInViewport.sort(function (a, b) {
         if (a.top < 0) {
           a.top = a.top * -1;
         }
@@ -34,7 +34,7 @@ if (sidebarMenu) {
         }
         return a.top - b.top
       });
-      return elementsInRange[0];
+      return elementsInViewport[0];
     }
 
     // This function gets run on load and page scroll.

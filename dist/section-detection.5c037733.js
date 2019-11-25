@@ -123,20 +123,20 @@ var sidebarMenu = document.querySelector('.sidebar-menu');
 if (sidebarMenu) {
   (function () {
     var sectionsToTrack = document.querySelectorAll('.section-to-track');
-    var bottomRange = window.innerHeight / 2; // Returns array of elements that are in range - top(0px) - bottomRange.
+    var middleOfViewport = window.innerHeight / 2; // Returns array of elements that are in range - top(0px) - middleOfViewport.
 
-    var getElementsInRange = function getElementsInRange(elements) {
-      var elementsInRange = [];
+    var getElementsInViewport = function getElementsInViewport(elements) {
+      var elementsInViewport = [];
       elements.forEach(function (element) {
         var elementPosition = element.getBoundingClientRect();
 
         if (elementPosition.top < 0 && elementPosition.height > elementPosition.top * -1) {
-          elementsInRange.push({
+          elementsInViewport.push({
             element: element,
             top: elementPosition.top
           });
-        } else if (elementPosition.top >= 0 && elementPosition.top < bottomRange) {
-          elementsInRange.push({
+        } else if (elementPosition.top >= 0 && elementPosition.top < middleOfViewport) {
+          elementsInViewport.push({
             element: element,
             top: elementPosition.top
           });
@@ -144,13 +144,13 @@ if (sidebarMenu) {
           element.classList.remove('active');
         }
       });
-      return elementsInRange;
+      return elementsInViewport;
     }; // Returns Element whos top position is closest to the top.
 
 
     var elementWithPriority = function elementWithPriority() {
-      var elementsInRange = getElementsInRange(sectionsToTrack);
-      elementsInRange.sort(function (a, b) {
+      var elementsInViewport = getElementsInViewport(sectionsToTrack);
+      elementsInViewport.sort(function (a, b) {
         if (a.top < 0) {
           a.top = a.top * -1;
         }
@@ -161,7 +161,7 @@ if (sidebarMenu) {
 
         return a.top - b.top;
       });
-      return elementsInRange[0];
+      return elementsInViewport[0];
     }; // This function gets run on load and page scroll.
     // Add active class to menu Item if tracked section is in range.
 
@@ -184,7 +184,7 @@ if (sidebarMenu) {
     window.addEventListener('scroll', activateMenuItem);
   })();
 }
-},{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -212,7 +212,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59950" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60988" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -243,8 +243,9 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
         assetsToAccept.forEach(function (v) {
           hmrAcceptRun(v[0], v[1]);
         });
-      } else {
-        window.location.reload();
+      } else if (location.reload) {
+        // `location` global exists in a web worker context but lacks `.reload()` function.
+        location.reload();
       }
     }
 
@@ -387,5 +388,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","section-detection.js"], null)
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","section-detection.js"], null)
 //# sourceMappingURL=/section-detection.5c037733.js.map
